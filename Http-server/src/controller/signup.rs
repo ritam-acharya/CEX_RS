@@ -1,5 +1,7 @@
-use actix_web::post;
+use actix_web::{Responder, post};
 
 
 #[post("/signup")]
-async fn signup()
+async fn signup() -> impl Responder {
+    "signup"
+}

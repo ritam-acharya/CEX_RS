@@ -1,5 +1,5 @@
 
-use actix_web::{App, HttpResponse, HttpServer, Responder, get};
+use actix_web::{App, HttpResponse, HttpServer, Responder, web, get};
 use std::io::Result;
 use std::env;
 use std::sync::Mutex;
@@ -33,10 +33,10 @@ async fn main() -> Result<()> {
     let bind_address = format!("{}:{}", host, port);
     println!("running on {runtime_env} enviorenment");
 
-    let app_state = AppState {
+    let app_state = web::Data::new(AppState {
         user_index: Mutex::new(1),
         users: Mutex::new(Vec::new())
-    };
+    });
 
     HttpServer::new(move || {
         App::new()
